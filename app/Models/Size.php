@@ -10,7 +10,7 @@ class Size extends Model
     use HasFactory;
     protected $guarded = [];
     
-    public function color(){
-        return $this->belongsTo(Color::class,);
+    public function sizeAttribute(){
+        return $this->hasMany(Attribute::class);
     }
 }

@@ -2,8 +2,8 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-               
-                <a class="nav-link {{(request()->is('admin/dashboard')? 'active':' ') }} " href="{{route('dashboard')}} ">
+
+                <a class="nav-link {{(request()->is('admin/admin')? 'active':' ') }} " href="{{route('admin')}} ">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
@@ -11,7 +11,26 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                    Setting
                 </a>
-
+                <a class="nav-link {{(request()->is('admin/user*'))? 'active':' ' }}"  href="{{route('user')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                   User
+                </a>
+                <a class="nav-link {{(request()->is('admin/userRole*'))? 'active':' ' }}"  href="{{url('admin/userRole')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                UserRole
+                </a>
+                <a class="nav-link {{(request()->is('admin/role_wise_user*'))? 'active':' ' }}"  href="{{route('role_wise_user')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                   Role Wise User
+                </a>
+                <a class="nav-link {{(request()->is('admin/permission*'))? 'active':' ' }}"  href="{{route('permission')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                  Permission
+                </a>
+                <a class="nav-link {{(request()->is('admin/role_wise_permission*'))? 'active':' ' }}"  href="{{route('role_wise_permission')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                 Role Wise Permission
+                </a>
                 <a class="nav-link {{(request()->is('admin/category*'))? 'active':' ' }}"  href="{{route('category')}} ">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                    Category
@@ -32,10 +51,24 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Product
                 </a>
-                
-                
-               
-                
+                <a class="nav-link {{(request()->is('admin/coupon*'))? 'active':' ' }}"  href="{{route('coupon')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                 Coupon
+                </a>
+                <a class="nav-link {{(request()->is('admin/order*'))? 'active':' ' }}"  href="{{route('order')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                 Order
+                </a>
+                <a class="nav-link {{(request()->is('admin/shippingCharge*'))? 'active':' ' }}"  href="{{route('shippingCharge')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    Shipping Charge
+                </a>
+                <a class="nav-link {{(request()->is('admin/about*'))? 'active':' ' }}"  href="{{route('about')}} ">
+                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    About
+                </a>
+
+
             </div>
         </div>
         <div class="sb-sidenav-footer">

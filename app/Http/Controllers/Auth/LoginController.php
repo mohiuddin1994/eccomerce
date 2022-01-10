@@ -40,19 +40,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-     public function login(Request $request){
-         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                if( Auth::user()->role == 1 ){
-                    return view('admin.admin_index');
-                }else{
-                    return redirect()->route('home');
-                }
-
-             
-         }else{
-             return redirect()->route('login')->with('error','email and password not match');
-         }
-     }
+    //  public function login(Request $request){
+    //      if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+    //                 return view('admin.admin_index'); 
+    //      }else{
+    //          return redirect()->route('login')->with('error','email and password not match');
+    //      }
+    //  }
 
 
 

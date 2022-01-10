@@ -20,21 +20,17 @@
                     <a class="btn btn-success" href="{{url('admin/category_add')}} "> Add category  </a>
                 </div>
                 <div class="row">
-
-
-                   
-                   
- 
-
-
+                    <div class="col-lg-4">
+                        @include('admin.admin_message')
+                    </div>
                     <table class="table table-striped">
                         <thead>
                           <tr>
                             <th scope="col">SL </th>
                             <th scope="col">Id</th>
                             <th scope="col">Category Name </th> 
-                         
-                           
+                            <th scope="col"> Count </th>
+                            <th scope="col"> Statu </th> 
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
@@ -48,10 +44,17 @@
                                     <th scope="row"> {{$category->id}} </th>
                                     
                                     <th scope="row"> {{$category->cat_name}} </th>
-                                    
+                                    <th scope="row"> {{$category->count}} </th>
+                                    <th scope="">
+                                        @if($category->statu == 1)
+                                            <a id="category_statu" href="{{url('admin/category_statu'.$category->id)}}" class="btn btn-success"> Active </a>
+                                        @else 
+                                        <a id="category_statu" href="{{url('admin/category_statu'.$category->id)}} " class="btn btn-info"> Unactive </a>
+                                        @endif
+                                </th>
                                     <th scope="row"> 
-                                         <a class="btn btn-success" href=" {{url('admin/category_edit'.$category->id)}} "> edit </a> 
-                                         <a class="btn btn-success"href=" {{url('admin/category_destory'.$category->id)}} "> delete </a> 
+                                         <a class="btn btn-success" href=" {{url('admin/category_edit'.$category->id)}} ">  <i class="far fa-edit"></i> </a> 
+                                         <a class="btn btn-success"href=" {{url('admin/category_destory'.$category->id)}} "> <i class="fas fa-trash-alt"></i> </a> 
                                     </th>
                                     
                                      
@@ -143,6 +146,20 @@
 
 </script>
 
+{{--  <script>
+$('#category_statu').on('click',function(){
+    var id = 1;
+    alert(id)
+   $.ajax({
+       url:"category_statu"+id,
+       type:"GET",
+       dataType:"json",
+       success:function(res){
+           console.log(res);
+       }
+   })
+})
+</script>  --}}
 
 
 @endsection

@@ -12,7 +12,7 @@ class colorController extends Controller
     //
     public function index()
     {
-        $colors = Color::with('size')->get();
+        $colors = Color::get();
         // return $colors;
         return view('admin.color.color_index',compact('colors'));
     }
@@ -22,20 +22,8 @@ class colorController extends Controller
         $validated = $request->validate([
             'color_name' => 'required',
              
-        ]);
-    
-        if($request->color_id){
-            $validated = $request->validate([
-                'color_name' => 'required',
-                 
-            ]);
-
-            $size = new Size();
-            $size->color_id = $request->color_id;
-            $size->size_name = $request->color_name;
-            $size->save();
-            return back()->with('success','successfully add  Size  ');
-        }
+        ]); 
+        
         $color = new Color();
         $color->color_name = $request->color_name;
         $color->save();
@@ -64,11 +52,21 @@ class colorController extends Controller
     public function destroy($id){
 
         $color = Color::where('id',$id)->first()->delete();
-        $sizes = Size::where('color_id',$id)->get();
-        foreach($sizes as $item){
-            $item->delete();
-        }
         return back()->with('success','delete success');
     }
+    
+// statu change 
+public function changeStatu($id){
+    $color = Color::where('id',$id)->first();
+     if($color->statu == 1){
+         $color->statu = 0;
+         $color->save();
+     }else{
+         $color->statu = 1 ;
+         $color->save();
+     }
+     return back()->with('success','statu change success');
+}
+
 
 }

@@ -31,6 +31,8 @@
                             <th scope="col">Id</th>
                             <th scope="col">  Category Name </th> 
                             <th scope="col"> Sub Category Name </th> 
+                            <th scope="col">Count </th> 
+                            <th scope="col">statu </th> 
                          
                            
                             <th scope="col">Action</th>
@@ -46,10 +48,18 @@
                                     <th scope="row"> {{$subcategory->id}} </th> 
                                     <th scope="row"> {{$subcategory->category->cat_name}} </th>
                                     <th scope="row"> {{$subcategory->sub_name}} </th>
-                                    
+                                    <th scope="row"> {{$subcategory->count}} </th>
+                                    <th scope="">
+                                        @if($subcategory->statu == 1)
+                                            <a id=" " href="{{url('admin/subcategory_statu'.$subcategory->id)}}" class="btn btn-success"> Active </a>
+                                        @else 
+                                        <a id=" " href="{{url('admin/subcategory_statu'.$subcategory->id)}} " class="btn btn-info"> Unactive </a>
+                                        @endif
+                                </th>
+                               
                                     <th scope="row"> 
-                                         <a class="btn btn-success" href=" {{url('admin/subcategory_edit'.$subcategory->id)}} "> edit </a> 
-                                         <a class="btn btn-success"href=" {{url('admin/subcategory_destory'.$subcategory->id)}} "> delete </a> 
+                                         <a class="btn btn-success" href=" {{url('admin/subcategory_edit'.$subcategory->id)}} ">  <i class="far fa-edit"></i> </a> 
+                                         <a class="btn btn-success"href=" {{url('admin/subcategory_destory'.$subcategory->id)}} "> <i class="fas fa-trash-alt"></i> </a> 
                                     </th>
                                     
                                      

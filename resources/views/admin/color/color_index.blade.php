@@ -25,6 +25,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th> <input type="checkbox" name="" id="allCheckbox">  </th>
                                     <th scope="col">SL </th>
                                     <th scope="col">Id</th>
                                     <th scope="col">Color Name </th>
@@ -38,18 +39,27 @@
                                 $count = 1
                                 @endphp
                                 @foreach ($colors as $color)
+
                                 <tr>
+                                   <th>  <input type="checkbox" class=" checkbox"   name="multiDelete" value="{{$color->id}} " id=""> </th>
+
                                     <th scope="row"> {{$count++}} </th>
                                     <th scope="row"> {{$color->id}} </th>
     
                                     <th scope="row"> {{$color->color_name}} </th>
-    
+                                    <th scope="">
+                                        @if($color->statu == 1)
+                                            <a id="color_statu" href="{{url('admin/color_statu'.$color->id)}}" class="btn btn-success"> Active </a>
+                                        @else 
+                                        <a id="color_statu" href="{{url('admin/color_statu'.$color->id)}} " class="btn btn-info"> Unactive </a>
+                                        @endif
+                                </th>
                                     <th scope="row">
                                         <a class="btn btn-success" href=" {{url('admin/color_edit'.$color->id)}} ">
-                                            edit
+                                            <i class="far fa-edit"></i>
                                         </a>
                                         <a class="btn btn-success" href=" {{url('admin/color_destroy'.$color->id)}} ">
-                                            delete </a>
+                                            <i class="fas fa-trash-alt"></i> </a>
                                     </th>
     
     
@@ -66,22 +76,11 @@
                         <form action=" {{url('admin/color_store')}} " method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="color_name">Color Name and Size </label>
+                                <label for="color_name">Color </label>
                                 <input id="color_name" class="form-control" type="text" value="{{old('color_name')}} "
                                     name="color_name">
                             </div>
-                            <div class="form-group">
-                                <label for="color_id"> Select Color  </label>
-                                <select name="color_id" id="color_id" class="form-control">
-                                    <option value="" selected disabled> Select color</option>
-                                    @foreach ($colors as $color)
-                                        <option value="{{$color->id}} "> {{$color->color_name}}</option>
-                                        @foreach ($color->size as $size)
-                                            <option value="{{$size->id}} "disabled > =={{$size->size_name}}</option> 
-                                         @endforeach
-                                    @endforeach
-                                </select>
-                            </div>
+                             
                             <input type="submit" class="btn btn-success" value="save" name="" id="">
                         </form>
                     </div>
@@ -169,5 +168,10 @@
 </script>
 
 
-
+<script>
+   $("#allCheckbox").click(function(){
+       {{--  alert('ok');  --}}
+       $(".checkbox").prop("checked",$(this).prop("checked"))
+   })
+</script>
 @endsection

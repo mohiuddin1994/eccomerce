@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id(); 
             $table->string('cat_name');
             $table->integer('statu')->default(1);
+            $table->integer('count')->default(0);
             $table->timestamps();
         });
     }

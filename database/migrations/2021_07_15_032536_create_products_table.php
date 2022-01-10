@@ -23,11 +23,15 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->integer('stock');
             $table->integer('category_id')->nullable();
-            $table->integer('subcategory_id')->nullable();
-            $table->integer('statu');
+            $table->string('subcategory_id')->nullable();
             $table->string('video')->nullable();
             $table->string('discount')->nullable();
-            $table->enum('is_fauture',['yes','no'])->nullable();
+            $table->string('fabric')->nullable();
+            $table->string('sleeve')->nullable();
+            $table->string('occassion')->nullable();
+            $table->string('weight')->nullable();
+            $table->integer('statu');
+            $table->integer('is_fauture')->default(0);
             $table->timestamps();
         });
     }

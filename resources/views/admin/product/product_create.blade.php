@@ -39,10 +39,11 @@
                             <div class="form-group">
                                 <label for="image">Product Image </label>
                                 <input id="image" class="form-control" type="file" value="{{old('image')}} " name="image">
+                             
                             </div>
                             <div class="form-group">
                                 <label for="description">Product Description </label>
-                               <textarea name="description" class="summernote"> {{old('description')}} </textarea>
+                               <textarea name="description" class="form-control"> {{old('description')}} </textarea>
                             </div>
                             <div class="form-group">
                                 <label for="price">Product Price </label>
@@ -55,7 +56,7 @@
                             <div class="form-group">
                                 <label for="category_id">Product Category </label>
                                  <select name="category_id" id="category_id" class="form-control" >
-                                     <option value="" selected disabled > Selecte Category </option>
+                                     <option value=""  > Selecte Category </option>
                                      @foreach ($categories as $category)
                                          <option value=" {{$category->id}} "> {{$category->cat_name}} </option>
                                      @endforeach 
@@ -64,7 +65,7 @@
                             
                             <div class="form-group">
                                 <label for="subcategory_id">Product Subcategory </label>
-                                 <select name="subcategory_id" id="subcategory_id" class="form-control" >
+                                 <select name="subcategory_id" id="subcategory_id" class="form-control">
                                       <option value="" selected disabled>Select Subcategory  </option>
                                  </select>
                             </div>
@@ -75,15 +76,51 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="discount">Product discoutn % </label>
+                                <label for="discount">Product Discoutn % </label>
                                 <input id="discount" class="form-control" type="text" value="{{old('discount')}} " name="discount">
+                            </div>
+                            <div class="form-group">
+                                <label for="fabric">Product Fabric </label>
+                                <select name="fabric" id="fabric" class="form-control">
+                                    <option value="" selected disabled > selecte Ocassion </option>
+                                    @foreach ($fabric as $item) 
+                                        <option value="{{$item}}"> {{$item}} </option>
+                                    @endforeach
+                                </select>
+                            </div> 
+                             <div class="form-group">
+                                <label for="sleeve">Product Sleeve </label>
+                                <select name="sleeve" id="sleeve" class="form-control">
+                                    <option value="" selected disabled > selecte Sleeve </option>
+                                    @foreach ($sleeve as $item) 
+                                        <option value="{{$item}}"> {{$item}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="occassion">Product Ocassion </label>
+                                <select name="occassion" id="occassion" class="form-control">
+                                    <option value="" selected disabled > selecte Ocassion </option>
+                                    @foreach ($occassion as $item) 
+                                        <option value="{{$item}}"> {{$item}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="weight">Product Weight  </label>
+                                <input id="weight" class="form-control" type="text" value="{{old('weight')}} " name="weight">
                             </div>
                              <div class="form-group">
                                 <label for="is_fauture">Product Fauture </label>
                                 <input type="checkbox" name="is_fauture" id="is_fauture" value="1"><br>
                                
                             </div> 
-                                
+                            <div class="form-group">
+                                <label for="is_fauture"> Slider image  </label>
+                                <input type="file" name="multi_image[]" multiple id="multi_image" class="form-control">
+                           
+                            </div>
+                            
                             <input type="submit" class="btn btn-success" value="save" name="" id="">
                         </form> 
                         

@@ -39,9 +39,14 @@
                             <th scope="col"> Subctegory </th> 
                             <th scope="col"> Video </th> 
                             <th scope="col"> Discount </th> 
+                            <th scope="col"> Fabric </th> 
+                            <th scope="col"> sleeve </th> 
+                            <th scope="col"> Occassion </th> 
+                            <th scope="col"> Weight </th> 
                             <th scope="col"> Fauture </th> 
                             <th scope="col"> statu </th> 
                             <th scope="col">Action</th>
+                            <th scope="col">image</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -55,43 +60,95 @@
                                     <th scope=""> {{$product->title}} </th>
                                     <th scope=""> {{$product->pro_code}} </th>
                                     <th scope=""> <img src="{{asset($product->image)}}" height="50px" alt=""> </th>
-                                    <th scope=""> {{ Str::limit($product->description,10)}} </th>
+                                    <td> {{substr( $product->description , 0, 30)}}</td>
                                     <th scope=""> {{$product->price}} </th>  
                                      <th scope=""> {{$product->stock}} </th>
-                                     <th scope=""> {{$product->category_id}} </th>
-                                     <th scope=""> {{$product->subcategory_id}} </th>
-                                     <th scope=""> 
+                                     <th scope=""> {{$product->category->cat_name}} </th>
+                                     @if ($product->subcategory_id == null)
+                                         <th>  </th>
+                                     @else
+                                            <th scope=""> {{$product->subcategory->sub_name}} </th>
+                                     @endif
+                                  
+                                     
+                                     
                                          @if ($product->video == null)
-                                             
-                                         @else
-                                         <video width="100" height="100" controls class="thumb" data-full="{{ asset($product->video) }}">
+                                              <th>  </th>
+                                         @else 
+                                         <th scope=""> 
+                                         <video width="50" height="50" controls class="thumb" data-full="{{ asset($product->video) }}">
                                             <source src="{{ asset($product->video) }}">
                                           </video>
+                                        </th>
                                          @endif
                                        
+                                   
+                                     <th scope=""> {{$product->discount}} % </th>
+                                     <th scope=""> {{$product->fabric}} </th>
+                                     <th scope=""> {{$product->sleeve}} </th>
+                                     <th scope=""> {{$product->occassion}} </th>
+                                     <th scope=""> {{$product->weight}} </th>
+
+                                      <th>
+                                        @if($product->is_fauture == 1)
+                                              <a href="{{url('admin/product_fauture'.$product->id)}} " class="btn btn-secondary"> yes </a>
+                                        @else
+                                            <a href="{{url('admin/product_fauture'.$product->id)}} " class="btn btn-secondary"> no </a>
+                                        @endif
+                                      </th>
+                                     <th scope="">
+                                            @if($product->statu == 1)
+                                                <a href="{{url('admin/product_statu'.$product->id)}} "class="btn btn-success"> Active </a>
+                                            @else 
+                                            <a href="{{url('admin/product_statu'.$product->id)}}  "class="btn btn-info"> Unactive </a>
+                                            @endif
                                     </th>
-                                     <th scope=""> {{$product->discount}} </th>
-                                     <th scope=""> {{$product->is_fauture}} </th>
-                                     
-                                    <th scope=""> 
-                                         <a class="btn btn-success" href=" {{url('admin/category_edit'.$product->id)}} "> edit </a> 
-                                         <a class="btn btn-success"href=" {{url('admin/category_destory'.$product->id)}} "> delete </a> 
+                                    <th  class=" "> 
+                                        <div style="width: 200px">
+                                            @if(count($product->productAttribute)>0)
+                                                    <a class="btn btn-success" href=" {{url('admin/product_attri_create'.$product->id)}} ">added attri </a> 
+                                            @else
+                                                <a class="btn btn-danger" href=" {{url('admin/product_attri_create'.$product->id)}} "> add attri </a> 
+                                            @endif
+                                            
+                                            <a class="btn btn-success" href=" {{url('admin/proudct_edit'.$product->id)}} "> <i class="far fa-edit"></i> </a> 
+                                            <a class="btn btn-success"href=" {{url('admin/proudct_destory'.$product->id)}} "> <i class="fas fa-trash-alt"></i> </a> 
+                                        </div>
                                     </th>
-                                    
-                                     
+
+                                    <th>
+                                        @foreach ($product->multiImage as $item)
+                                        <th scope=""> <img src="{{asset($item->image)}}" height="50px" alt=""> </th>
+                                        @endforeach
+                                    </th>
+                                   
                                 </tr>
+
                             @endforeach
-                         
+                            
                           
                         </tbody>
                       </table>
                 </div>
             </div>
+
+            {{--  <nav aria-label="...">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#"> {{$products->links()}} </a></li>
+                   
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+            </nav>  --}}
         </main>
         @include('admin.admin_footer')
     </div>
 
-
+    {{--  {{ $users->links() }}  --}}
 </div>
 
 @endsection

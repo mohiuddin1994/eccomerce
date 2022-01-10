@@ -18,6 +18,7 @@ class CreateSubcategoriesTable extends Migration
             $table->integer('category_id');
             $table->string('sub_name');
             $table->integer('statu')->default(1);
+            $table->integer('count')->default(0);
             $table->timestamps();
         });
     }

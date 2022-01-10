@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
  
@@ -12,7 +13,7 @@ class categoryController extends Controller
 {
     //category index route 
     public function index(){
-        $categories = Category::where('statu',1)->get();
+        $categories = Category::get();
         return view('admin.category.category_index',compact('categories'));
     } 
 
@@ -68,13 +69,32 @@ class categoryController extends Controller
     }
     // category destroy rotue 
     public function destroy($id){
-
-        $category = Category::where('id',$id)->first()->delete();
-        $subcategory = Subcategory::where('category_id',$id)->get();
-        foreach($subcategory as $item){
-            $item->delete();
+        $product = Product::where('category_id','=',$id)->get();
+        
+            if(count($product)>0){
+                return back()->with('success',' not delete it add to  product ');
+            }else{
+                 $category = Category::where('id',$id)->first()->delete();
+                $subcategory = Subcategory::where('category_id',$id)->get();
+                foreach($subcategory as $item){
+                    $item->delete();
+                }
+                return back()->with('success','delete success');
+            }
+            
         }
-        return back()->with('success','delete success');
-    }
+        // change statu 
+       
+        public function changeStatu($id){
+            $category = Category::where('id',$id)->first();
+             if($category->statu == 1){
+                 $category->statu = 0;
+                 $category->save();
+             }else{
+                 $category->statu = 1 ;
+                 $category->save();
+             }
+             return back()->with('success','statu change success');
+        }
 
 }
