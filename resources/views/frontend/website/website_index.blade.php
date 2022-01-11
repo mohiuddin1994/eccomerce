@@ -81,9 +81,15 @@
                                 <h4 style="text-align:center"><a class="btn"
                                         href=" {{url('product_details'.$product->id)}} "> <i
                                             class="icon-zoom-in"></i></a>
-
-                                        <button class="btn" type="submit"> Add to <i class="icon-shopping-cart">
+                                            @if(count($product->productAttribute)>0)
+                                            <a class="btn" href=" {{url('product_details'.$product->id)}} ">view </a> <br>
+                                            @else
+                                                <button class="btn" type="submit"> Add to <i class="icon-shopping-cart">
                                                 </i></button> <br>
+                                            @endif
+
+
+
 
                                     @if ($product->discount>0)
                                     <a class="btn btn-primary" href="#">Rs. <del> {{$product->price}} </del>

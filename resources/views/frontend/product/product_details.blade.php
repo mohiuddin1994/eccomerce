@@ -69,7 +69,7 @@
                     <div class="span6">
                         <input type="hidden" value="{{$product->id}} " name="product_id" id="product_id">
                         <h3>{{$product->name}} </h3>
-                       
+
                         <small>- Brand Name</small>
                         <hr class="soft" />
                         <small id="stock">{{$product->stock}} items in stock</small>
@@ -198,21 +198,46 @@
 
                 <ul class="thumbnails">
                     @foreach ($relatedProduct as $item)
-                        <li class="span3">
-                            <div class="thumbnail">
-                                <a href="product_details.html"><img src="{{$item->image}}" alt="" /></a>
-                                <div class="caption">
-                                    <h5> {{$item->title}} </h5>
-                                    <p>
-                                        {{ substr($product->description,0,30 )}}
-                                    </p>
-                                    <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i
-                                                class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                                class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                            href="#">Rs.1000</a></h4>
-                                </div>
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <a href="product_details.html"><img src="{{$item->image}}" alt="" /></a>
+                            <div class="caption">
+                                <h5> {{$item->title}} </h5>
+                                <p>
+                                    {{ substr($item->description,0,30 )}}
+                                </p>
+                                <form action="{{url('single_productAddCart')}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{$item->id}} " name="product_id" id="">
+
+                                    <h4 style="text-align:center"><a class="btn"
+                                            href=" {{url('product_details'.$item->id)}} "> <i
+                                                class="icon-zoom-in"></i></a>
+                                        @if(count($item->productAttribute)>0)
+                                        <a class="btn" href=" {{url('product_details'.$item->id)}} ">view </a> <br>
+                                        @else
+                                        <button class="btn" type="submit"> Add to <i class="icon-shopping-cart">
+                                            </i></button> <br>
+                                        @endif
+
+
+
+
+                                        @if ($item->discount>0)
+                                        <a class="btn btn-primary" href="#">Rs. <del> {{$item->price}} </del>
+                                            {{$item->price - $item->price*$item->discount/100 }} </a>
+                                    </h4>
+                                    <input type="hidden"
+                                        value="{{$item->price - $item->price*$item->discount/100 }} "
+                                        name="cart_price" id="">
+                                    @else
+                                    <h4> <a class="btn btn-primary" href="#">Rs.{{$item->price}}</a></h4>
+                                    <input type="hidden" value="{{$item->price}} " name="cart_price" id="">
+                                    @endif
+                                </form>
                             </div>
-                        </li>
+                        </div>
+                    </li>
                     @endforeach
 
 
